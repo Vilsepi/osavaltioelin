@@ -30,19 +30,31 @@ stepFunctions:
           Enter:
             Type: Task
             Resource: ${self:custom.prefix}-echo
-            Next: Wait
+            Next: Kilpajuoksu
 
-          Wait:
-            Type: Wait
-            Seconds: 3
+          Kilpajuoksu:
+            Type: Parallel
             Next: Approve
+            Branches:
+              - StartAt: VenaaA
+                States:
+                  VenaaA:
+                    Type: Wait
+                    Seconds: 6
+                    End: true
+              - StartAt: VenaaB
+                States:
+                  VenaaB:
+                    Type: Wait
+                    Seconds: 3
+                    End: true
 
           Approve:
             Type: Pass
             Result:
               approved: true
               comment: Seal of approval
-            ResultPath: "$.approval"
+            ResultPath: "$[0].approval"
             Next: Exit
 
           Exit:
