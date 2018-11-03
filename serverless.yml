@@ -1,4 +1,4 @@
-service: osavaltioelin
+service: tilavihkutin
 frameworkVersion: ">=1.32.0 <2.0.0"
 
 provider:
@@ -8,19 +8,23 @@ provider:
   runtime: python3.6
 
 functions:
-  hellofunc:
-    handler: handler.hello
+  echo:
+    handler: echo.handler
 
 stepFunctions:
   stateMachines:
-    tilavitkutkin:
-      name: tilavitkuttimen-nimi
+    tilavihkutin:
+      name: tilavihkutin
       definition:
-        StartAt: EntryState
+        StartAt: Enter
         States:
-          EntryState:
+          Enter:
             Type: Task
-            Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-hello
+            Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-echo
+            Next: Exit
+          Exit:
+            Type: Task
+            Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-echo
             End: true
 
 plugins:

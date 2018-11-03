@@ -1,8 +1,17 @@
 
-# osavaltioelin
+# Tilavihkutin
 
-Amatsooni Seitti Palvelu Osavaltio Ruumiinosan Toiminto
+Amatsooni-seittijumalanpalvelus: Osavaltioruumiinosantoiminnot
 
+
+## Prerequisites
+
+    sudo npm install -g serverless
+    npm install
+
+## Deploy
+
+    sls deploy
 
 ## Step Functions 101
 
