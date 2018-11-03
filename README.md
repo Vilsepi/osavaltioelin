@@ -1,7 +1,7 @@
 
 # Tilavihkutin
 
-Amatsooni-seittijumalanpalvelus: Osavaltioruumiinosantoiminnot
+Amatsooni-seittijumalanpalvelus: Kukonaskelruumiinosantoiminnot
 
 
 ## Prerequisites
