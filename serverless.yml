@@ -19,6 +19,10 @@ stepFunctions:
   stateMachines:
     tilavihkutin:
       name: tilavihkutin
+      events:
+        - http:
+            path: run
+            method: GET
       definition:
         StartAt: Enter
         States:
