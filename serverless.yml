@@ -1,0 +1,28 @@
+service: osavaltioelin
+frameworkVersion: ">=1.32.0 <2.0.0"
+
+provider:
+  name: aws
+  region: eu-west-1
+  profile: heap
+  runtime: python3.6
+
+functions:
+  hellofunc:
+    handler: handler.hello
+
+stepFunctions:
+  stateMachines:
+    tilavitkutkin:
+      name: tilavitkuttimen-nimi
+      definition:
+        StartAt: EntryState
+        States:
+          EntryState:
+            Type: Task
+            Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-hello
+            End: true
+
+plugins:
+  - serverless-step-functions
+  - serverless-pseudo-parameters

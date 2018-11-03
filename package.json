@@ -1,0 +1,12 @@
+{
+  "name": "osavaltioelin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vilsepi/osavaltioelin.git"
+  },
+  "devDependencies": {
+    "serverless-pseudo-parameters": "^2.2.0",
+    "serverless-step-functions": "^1.8.0"
+  }
+}
