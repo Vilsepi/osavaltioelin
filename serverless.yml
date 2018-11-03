@@ -18,10 +18,20 @@ stepFunctions:
       definition:
         StartAt: Enter
         States:
+
           Enter:
             Type: Task
             Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-echo
+            Next: Approve
+
+          Approve:
+            Type: Pass
+            Result:
+              approved: true
+              comment: Seal of approval
+            ResultPath: "$.approval"
             Next: Exit
+
           Exit:
             Type: Task
             Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-echo
