@@ -30,6 +30,11 @@ stepFunctions:
           Enter:
             Type: Task
             Resource: ${self:custom.prefix}-echo
+            Next: Wait
+
+          Wait:
+            Type: Wait
+            Seconds: 3
             Next: Approve
 
           Approve:
@@ -44,6 +49,9 @@ stepFunctions:
             Type: Task
             Resource: ${self:custom.prefix}-echo
             End: true
+
+resources:
+  Description: Make state machines great again!
 
 plugins:
   - serverless-step-functions
