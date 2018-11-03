@@ -1,9 +1,13 @@
 service: tilavihkutin
 frameworkVersion: ">=1.32.0 <2.0.0"
 
+custom:
+  prefix: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${self:provider.stage}
+
 provider:
   name: aws
   region: eu-west-1
+  stage: ${opt:stage, 'dev'}
   profile: heap
   runtime: python3.6
 
@@ -21,7 +25,7 @@ stepFunctions:
 
           Enter:
             Type: Task
-            Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-echo
+            Resource: ${self:custom.prefix}-echo
             Next: Approve
 
           Approve:
@@ -34,7 +38,7 @@ stepFunctions:
 
           Exit:
             Type: Task
-            Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-echo
+            Resource: ${self:custom.prefix}-echo
             End: true
 
 plugins:
