@@ -55,7 +55,16 @@ stepFunctions:
               approved: true
               comment: Seal of approval
             ResultPath: "$[0].approval"
-            Next: Exit
+            Next: PlayItAgain
+
+          PlayItAgain:
+            Type: Choice
+            Choices:
+              - Not:
+                  Variable: $[0].approval.approved
+                  BooleanEquals: false
+                Next: Enter
+            Default: Exit
 
           Exit:
             Type: Task
